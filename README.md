@@ -29,7 +29,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
 
-<img src="/home.png"/>
+<img src="/home.PNG"/>
 
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
