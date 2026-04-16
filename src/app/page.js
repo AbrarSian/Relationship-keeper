@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ChartNoAxesColumn, Clock3, House, Plus } from "lucide-react";
 
 import friends from "../data/friends.json";
@@ -85,7 +86,11 @@ export default function Home() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {friends.map((friend) => (
-            <div key={friend.id} className="rounded-[26px] border border-[#e5e7eb] bg-white p-6 shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
+            <Link
+              key={friend.id}
+              href={`/friend/${friend.id}`}
+              className="rounded-[26px] border border-[#e5e7eb] bg-white p-6 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(15,23,42,0.08)]"
+            >
               <div className="flex flex-col items-center text-center">
                 <div className="relative h-20 w-20 overflow-hidden rounded-full bg-[#f3f4f6]">
                   <img src={friend.picture} alt={friend.name} className="h-full w-full object-cover" />
@@ -107,7 +112,7 @@ export default function Home() {
                   {friend.status.replace("-", " ")}
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
