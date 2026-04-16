@@ -31,8 +31,8 @@ function formatDate(dateString) {
   }).format(new Date(dateString));
 }
 
-export default function FriendDetails({ params }) {
-  const id = Number(params.id);
+export default async function FriendDetails({ params }) {
+  const id = Number((await params).id);
   const friend = friends.find((item) => item.id === id);
 
   if (!friend) {
