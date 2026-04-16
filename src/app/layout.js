@@ -4,7 +4,7 @@ import { InteractionProvider } from "@/context/InteractionContext";
 import "./globals.css";
 
 export const metadata = {
-  title: "KinKeeper",
+  title: "Relationship Keeper",
   description: "Family Management Platform",
   icons: {
     icon: "/favicon.png",
