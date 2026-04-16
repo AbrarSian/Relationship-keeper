@@ -6,6 +6,9 @@ import "./globals.css";
 export const metadata = {
   title: "KinKeeper",
   description: "Family Management Platform",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
