@@ -3,25 +3,14 @@ import Link from "next/link";
 import { ArrowLeft, Clock3, MessageSquare, Phone, Video, House, ChartNoAxesColumn } from "lucide-react";
 import { notFound } from "next/navigation";
 import friends from "../../../data/friends.json";
+import QuickCheckIn from "@/components/QuickCheckIn";
+import RecentInteractions from "@/components/RecentInteractions";
 
 const statusStyles = {
   overdue: "bg-[#fef2f2] text-[#b91c1c]",
   "almost due": "bg-[#fef7ed] text-[#b45309]",
   "on-track": "bg-[#ecfdf5] text-[#166534]",
 };
-
-const interactionList = [
-  { type: "Text", description: "Asked for career advice", date: "Jan 28, 2026" },
-  { type: "Meetup", description: "Industry conference meetup", date: "Jan 28, 2026" },
-  { type: "Video", description: "Asked for career advice", date: "Jan 28, 2026" },
-  { type: "Text", description: "Asked for career advice", date: "Jan 28, 2026" },
-];
-
-function getIcon(type) {
-  if (type === "Video") return Video;
-  if (type === "Text") return MessageSquare;
-  return Phone;
-}
 
 function formatDate(dateString) {
   return new Intl.DateTimeFormat("en-US", {
@@ -135,50 +124,8 @@ export default async function FriendDetails({ params }) {
                 </button>
               </div>
             </div>
-
-            <div className="rounded-[20px] border border-[#e5e7eb] bg-white p-6 shadow-sm">
-              <p className="text-sm font-semibold text-[#111827]">Quick Check-In</p>
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                <button className="inline-flex flex-col items-center justify-center gap-2 rounded-[18px] border border-[#e5e7eb] bg-[#f8fafc] px-4 py-6 text-sm font-semibold text-[#111827] transition hover:bg-[#eef2ff]">
-                  <Phone size={18} />
-                  Call
-                </button>
-                <button className="inline-flex flex-col items-center justify-center gap-2 rounded-[18px] border border-[#e5e7eb] bg-[#f8fafc] px-4 py-6 text-sm font-semibold text-[#111827] transition hover:bg-[#eef2ff]">
-                  <MessageSquare size={18} />
-                  Text
-                </button>
-                <button className="inline-flex flex-col items-center justify-center gap-2 rounded-[18px] border border-[#e5e7eb] bg-[#f8fafc] px-4 py-6 text-sm font-semibold text-[#111827] transition hover:bg-[#eef2ff]">
-                  <Video size={18} />
-                  Video
-                </button>
-              </div>
-            </div>
-
-            <div className="rounded-[20px] border border-[#e5e7eb] bg-white p-6 shadow-sm">
-              <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-                <p className="text-sm font-semibold text-[#111827]">Recent Interactions</p>
-                <button className="rounded-full border border-[#e5e7eb] bg-[#f8fafc] px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#111827] transition hover:bg-[#eef2ff]">
-                  Full History
-                </button>
-              </div>
-              <div className="mt-5 space-y-4">
-                {interactionList.map((interaction, index) => {
-                  const Icon = getIcon(interaction.type);
-                  return (
-                    <div key={index} className="flex flex-col items-start gap-4 rounded-[18px] border border-[#e5e7eb] bg-[#f8fafc] p-4 sm:flex-row sm:items-center">
-                      <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#153626]">
-                        <Icon size={18} />
-                      </span>
-                      <div className="flex-1">
-                        <p className="font-semibold text-[#111827]">{interaction.type}</p>
-                        <p className="mt-1 text-sm text-[#6b7280]">{interaction.description}</p>
-                      </div>
-                      <span className="text-xs uppercase tracking-[0.18em] text-[#9ca3af]">{interaction.date}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            <QuickCheckIn friend={friend} />
+            <RecentInteractions friend={friend} />
           </div>
         </div>
       </section>

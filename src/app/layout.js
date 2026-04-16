@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Globe, Mail, X } from "lucide-react";
+import { InteractionProvider } from "@/context/InteractionContext";
 import "./globals.css";
 
 export const metadata = {
@@ -11,7 +12,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="antialiased">
-        {children}
+        <InteractionProvider>
+          {children}
         <footer className="bg-[#153626] text-white">
           <div className="mx-auto flex min-h-[300px] max-w-5xl flex-col items-center justify-center gap-8 px-6 py-10">
             <div className="flex flex-col items-center justify-center gap-6 text-center">
@@ -46,6 +48,7 @@ export default function RootLayout({ children }) {
             </div>
           </div>
         </footer>
+        </InteractionProvider>
       </body>
     </html>
   );

@@ -2,16 +2,32 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Clock3, ChartNoAxesColumn } from "lucide-react";
+import { Clock3, ChartNoAxesColumn, House } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
-
-const data = [
-  { name: "Text", value: 35, color: "#8b5cf6" },
-  { name: "Call", value: 45, color: "#184d3d" },
-  { name: "Video", value: 20, color: "#22c55e" },
-];
+import { useInteractions } from "@/context/InteractionContext";
+import { useMemo } from "react";
 
 export default function Stats() {
+    const { interactions, isLoaded } = useInteractions();
+
+  const data = useMemo(() => {
+    if (!isLoaded) return [];
+    let textCount = 0;
+    let callCount = 0;
+    let videoCount = 0;
+
+    interactions.forEach((item) => {
+      if (item.type === "Text") textCount++;
+      else if (item.type === "Call") callCount++;
+      else if (item.type === "Video") videoCount++;
+    });
+
+    return [
+      { name: "Text", value: textCount, color: "#8b5cf6" },
+      { name: "Call", value: callCount, color: "#184d3d" },
+      { name: "Video", value: videoCount, color: "#22c55e" },
+    ].filter(d => d.value > 0);
+  }, [interactions, isLoaded]);
   return (
     <main className="min-h-screen bg-[#f6f8f8] px-4 pb-16 pt-4 md:px-12 md:pb-24 md:pt-3.5">
       <div className="mx-auto flex flex-col w-full max-w-5xl items-start justify-between gap-4 sm:flex-row sm:gap-0">
@@ -20,6 +36,13 @@ export default function Stats() {
         </Link>
 
         <nav className="flex items-center gap-0.5 rounded-[10px] border border-[#e5e7eb] bg-white p-1 shadow-[0_1px_2px_rgba(16,24,40,0.05)]">
+          <Link
+            href="/"
+            className="inline-flex h-9 items-center gap-1.5 rounded-[7px] px-3.5 text-[12px] font-medium text-[#6b7280]"
+          >
+            <House size={13} strokeWidth={2.2} />
+            Home
+          </Link>
           <Link
             href="/timeline"
             className="inline-flex h-9 items-center gap-1.5 rounded-[7px] px-3.5 text-[12px] font-medium text-[#6b7280]"
